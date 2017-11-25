@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 //! Project version number for youtube-ios-player-helper.
 FOUNDATION_EXPORT double youtube_ios_player_helperVersionNumber;
