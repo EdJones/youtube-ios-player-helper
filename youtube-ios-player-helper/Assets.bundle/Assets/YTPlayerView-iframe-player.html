@@ -55,6 +55,7 @@
             var $ = document.querySelector.bind(document);
             YT.ready(function () {
                      player = new YT.Player('player', % @);
+                     iframe = $('#player');
                      player.setSize(window.innerWidth, window.innerHeight);
                      window.location.href = 'ytplayer://onYouTubeIframeAPIReady';
                      
@@ -87,7 +88,6 @@
         
         function onReady(event) {
             window.location.href = 'ytplayer://onReady?data=' + event.data;
-            iframe = $('#player');
             document.addEventListener("webkitfullscreenchange", function () {
                                       if (!document.webkitIsFullScreen) {
                                       window.location.href = 'ytplayer://onFullScreenChange?data=' + false;

@@ -73,9 +73,9 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 
 - (void)fullScreen:(BOOL)fullScreen {
     if(fullScreen){
-        [self stringFromEvaluatingJavaScript:@"requestFullScreen()"];
+        [self stringFromEvaluatingJavaScript:@"requestFullScreen();"];
     }else{
-        [self stringFromEvaluatingJavaScript:@"exitFullScreen()"];
+        [self stringFromEvaluatingJavaScript:@"exitFullScreen();"];
     }
 }
     
