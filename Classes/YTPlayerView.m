@@ -863,7 +863,17 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 }
 
 - (WKWebView *)createNewWebView {
-    WKWebView *webView = [[WKWebView alloc] initWithFrame: self.bounds configuration: [WKWebViewConfiguration new]];
+    NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+    
+    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+    [wkUController addUserScript:wkUScript];
+    
+    WKWebViewConfiguration *configuration = [WKWebViewConfiguration new];
+    
+    configuration.userContentController = wkUController;
+
+    WKWebView *webView = [[WKWebView alloc] initWithFrame: self.bounds configuration: configuration;
     [webView configuration].allowsInlineMediaPlayback = YES;
     [webView configuration].mediaPlaybackRequiresUserAction = NO;
     webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
