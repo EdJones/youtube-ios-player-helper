@@ -873,7 +873,7 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     
     configuration.userContentController = wkUController;
 
-    WKWebView *webView = [[WKWebView alloc] initWithFrame: self.bounds configuration: configuration;
+    WKWebView *webView = [[WKWebView alloc] initWithFrame: self.bounds configuration: configuration];
     [webView configuration].allowsInlineMediaPlayback = YES;
     [webView configuration].mediaPlaybackRequiresUserAction = NO;
     webView.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
