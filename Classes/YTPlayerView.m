@@ -52,7 +52,7 @@ NSString static *const kYTPlayerCallbackOnStateChange = @"onStateChange";
 NSString static *const kYTPlayerCallbackOnPlaybackQualityChange = @"onPlaybackQualityChange";
 NSString static *const kYTPlayerCallbackOnError = @"onError";
 NSString static *const kYTPlayerCallbackOnPlayTime = @"onPlayTime";
-
+NSString static *const kYTPlayerCallbackOnFullScreenChange = @"onFullScreenChange";
 NSString static *const kYTPlayerCallbackOnYouTubeIframeAPIReady = @"onYouTubeIframeAPIReady";
 NSString static *const kYTPlayerCallbackOnYouTubeIframeAPIFailedToLoad = @"onYouTubeIframeAPIFailedToLoad";
 
@@ -71,6 +71,14 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
 
 @implementation YTPlayerView
 
+- (void)fullScreen:(nonnull Boolean*)fullScreen {
+    if(fullScreen){
+        [self stringFromEvaluatingJavaScript:@"requestFullScreen()"];
+    }else{
+        [self stringFromEvaluatingJavaScript:@"exitFullScreen()"];
+    }
+}
+    
 - (BOOL)loadWithVideoId:(NSString *)videoId {
     return [self loadWithVideoId:videoId playerVars:nil];
 }
@@ -600,6 +608,14 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
     } else if ([action isEqualToString:kYTPlayerCallbackOnYouTubeIframeAPIFailedToLoad]) {
         if (self.initialLoadingView) {
             [self.initialLoadingView removeFromSuperview];
+        }
+    }else if([action isEqualToString:kYTPlayerCallbackOnFullScreenChange]){
+        if([self.delegate respondsToSelector:@selector(playerView:didChangeFullScreen:)]){
+            if([data isEqualToString:@"true"]){
+                [self.delegate playerView:self didChangeFullScreen:YES];
+            }else{
+                [self.delegate playerView:self didChangeFullScreen:NO];
+            }
         }
     }
 }

@@ -62,6 +62,14 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
 
 @optional
 /**
+ *Invoked when the player view toggle between fullscreen on or off.
+ * @param playerView The YTPlayerView instance where fullscreen state has changed.
+ * @param fullScreen Boolean designating if the playback is in fullscreen.
+ */
+    
+- (void)playerView:(nonnull YTPlayerView *)playerView didChangeFullScreen:(Boolean)fullScreen;
+    
+/**
  * Invoked when the player view is ready to receive API calls.
  *
  * @param playerView The YTPlayerView instance that has become ready.
@@ -93,7 +101,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
 - (void)playerView:(nonnull YTPlayerView *)playerView receivedError:(YTPlayerError)error;
 
 /**
- * Callback invoked frequently when playBack is plaing.
+ * Callback invoked frequently when playBack is playing.
  *
  * @param playerView The YTPlayerView instance where the error has occurred.
  * @param playTime float containing curretn playback time.
@@ -145,6 +153,13 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
 /** A delegate to be notified on playback events. */
 @property(nonatomic, weak, nullable) id<YTPlayerViewDelegate> delegate;
 
+/**
+ * This method toggles the player's fullscreen or exits fullscreen.
+ *
+ *@param fullScreen the bool to enter or exit fullscreen
+ */
+- (void) fullScreen:(nonnull Boolean*)fullScreen;
+    
 /**
  * This method loads the player with the given video ID.
  * This is a convenience method for calling YTPlayerView::loadPlayerWithVideoId:withPlayerVars:
