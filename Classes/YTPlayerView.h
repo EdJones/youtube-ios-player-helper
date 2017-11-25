@@ -158,7 +158,7 @@ typedef NS_ENUM(NSInteger, YTPlayerError) {
  *
  *@param fullScreen the bool to enter or exit fullscreen
  */
-- (void) fullScreen:(nonnull BOOL *)fullScreen;
+- (void) fullScreen:(BOOL)fullScreen;
     
 /**
  * This method loads the player with the given video ID.
